@@ -36,13 +36,15 @@ constant    test_numbs : integer := 5;
 constant    clk_period : time := 10 ns;
 
 type T_PATTERN is array (test_numbs - 1 downto 0) of STD_LOGIC_VECTOR (mcd_n - 1 downto 0);
-constant pattern_a : T_PATTERN := (x"69", x"38", x"4b", x"70", x"54");
-constant pattern_b : T_PATTERN := (x"3f", x"0e", x"34", x"2c", x"6a");
-constant pattern_res : T_PATTERN := (x"15", x"0e", x"01", x"04", x"02");
+--constant pattern_a : T_PATTERN := (x"69", x"38", x"4b", x"70", x"54");
+constant pattern_a : T_PATTERN := ("01101001", "00111000", "01001011", "01110000", "01010100");
+--constant pattern_b : T_PATTERN := (x"3f", x"0e", x"34", x"2c", x"6a");
+constant pattern_b : T_PATTERN := ("00111111", "00001110", "00110100", "00101100", "01101010");
+constant pattern_res : T_PATTERN := ("00010101", "00001110", "00000001", "00000100", "00000010");
 
-signal      a, b, mcd           : STD_LOGIC_VECTOR (mcd_n - 1 downto 0) := x"00";
-signal      enter, reset, clkk  : STD_LOGIC;
-signal      fin                 : STD_LOGIC;
+signal      a, b, mcd           : STD_LOGIC_VECTOR (mcd_n - 1 downto 0) := (others => '0');
+signal      enter, reset, clkk  : STD_LOGIC := '0';
+signal      fin                 : STD_LOGIC := '0';
 
 begin
 
@@ -70,8 +72,10 @@ begin
     --test_runner_setup(runner, runner_cfg);
 
     -- Initial values
-    a <= x"00";
-    b <= x"00";
+    --a <= x"00";
+    a <= "00000000";
+    --b <= x"00";
+    b <= "00000000";
     enter <= '0';
     reset <= '0';
     wait for 100 ms;
@@ -93,6 +97,8 @@ begin
         -- Check results
         assert mcd = pattern_res(i)
             report "wrong mcd value" severity warning;
+        --    report "slv: " & std_logic_vector'image(mcd);
+        --    report "" & std_logic_vector'image(pattern_res(i));
     end loop;
 
     wait;

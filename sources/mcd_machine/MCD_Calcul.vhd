@@ -1,6 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
+--use ieee.std_logic_unsigned.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -97,9 +98,9 @@ end process;
 Subtraction: process (s_bb, s_aa, s_sign)
 begin
     if s_sign = '0' then
-        RESTA_OUT <= s_bb - s_aa;
+        RESTA_OUT <= std_logic_vector(unsigned(s_bb) - unsigned(s_aa));
     else
-        RESTA_OUT <= s_aa - s_bb;
+        RESTA_OUT <= std_logic_vector(unsigned(s_aa) - unsigned(s_bb));
     end if;
 end process;
 

@@ -1,6 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use ieee.std_logic_arith.all;
+use ieee.NUMERIC_STD.all;
+--use ieee.std_logic_arith.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -21,33 +22,23 @@ end Bloq_COUNTER;
 
 architecture Behavioral of Bloq_COUNTER is
 
-constant    max_limit   : integer := 4194304;
+constant    max_limit   : integer := 4194302;
 
-signal  cont    : integer   range 0 to max_limit;
+--signal  cont    : integer   range 0 to max_limit;
+signal  cont    : unsigned (bit_size - 1 downto 0) := (others => '0');
 signal  max     : STD_LOGIC;
 --signal  s_clk   : STD_LOGIC;
 
 begin
 
---Proceso_CLOCK: process
---begin
---    while true loop
---        s_clk <= '0';
---        wait for 5 ns;
---        s_clk <= '1';
---        wait for 5 ns;
---    end loop;
---end process;
-
---CLK <= s_clk;
 MAX_OUT <= max;
 
 CONTADOR: process (CLK)
 begin
     --if rising_edge(s_clk) then    -----> HACE LO MISMO
     if CLK'event AND CLK = '1' then
-        if cont = max_limit then
-            cont <= 0;      -- Variables NO son señales, van sin comillas
+        if cont > to_unsigned(max_limit, cont'length) then
+            cont <= (others => '0');
             max <= '1';
         else
             cont <= cont + 1;
@@ -56,6 +47,6 @@ begin
     end if;
 end process;
 
-OUTPUT <= conv_std_logic_vector(cont, bit_size);
+OUTPUT <= std_logic_vector(cont);
 
 end Behavioral;
