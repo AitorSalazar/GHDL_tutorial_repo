@@ -1,0 +1,7 @@
+# .gitignore del repo de ghdl_tutorial_repo
+
+*.o
+sources/mcd_machine/tb_mcd_machine
+*.cf
+.DS_Store
+*/.DS_Store
