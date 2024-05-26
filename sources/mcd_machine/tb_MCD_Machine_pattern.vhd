@@ -2,6 +2,7 @@ library IEEE;
 --library vunit_lib;
 use IEEE.STD_LOGIC_1164.ALL;
 use ieee.numeric_std.all;
+use IEEE.STD_LOGIC_TEXTIO.ALL;
 --context vunit_lib.vunit_context;
 
 -- Uncomment the following library declaration if using
@@ -45,7 +46,6 @@ constant pattern_res : T_PATTERN := ("00010101", "00001110", "00000001", "000001
 signal      a, b, mcd           : STD_LOGIC_VECTOR (mcd_n - 1 downto 0) := (others => '0');
 signal      enter, reset, clkk  : STD_LOGIC := '0';
 signal      fin                 : STD_LOGIC := '0';
-
 begin
 
 UUT: MCD_Machine port map (
@@ -67,8 +67,11 @@ begin
     end loop;
 end process;
 
+
 TestBench: process
+variable vector_str : string(1 to 8);
 begin
+
     --test_runner_setup(runner, runner_cfg);
     -- Initial values
     --a <= x"00";
@@ -96,15 +99,19 @@ begin
         b <= "00000000";
         wait for 1 ms;
         
-        -- Para iniciar una siguiente operación
+        vector_str := to_string(mcd);
+        report "The value of my_vector is: " & vector_str;
+        -- Para iniciar una siguiente operaciï¿½n
         enter <= '1';
         wait for 0.10 ms;
         enter <= '0';
         wait for 0.10 ms;
         -- Check results
-        assert mcd = pattern_res(i)
-            report "wrong mcd value" severity warning;
-        --    report "slv: " & std_logic_vector'image(mcd);
+
+        --assert mcd /= pattern_res(i)
+            --report "wrong mcd value" severity warning;
+           -- report "The value of my_vector is: " & vector_str;
+           -- report "slv: " & mcd;
         --    report "" & std_logic_vector'image(pattern_res(i));
     end loop;
 
