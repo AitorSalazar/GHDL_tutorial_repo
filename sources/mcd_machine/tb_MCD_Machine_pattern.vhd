@@ -70,7 +70,6 @@ end process;
 TestBench: process
 begin
     --test_runner_setup(runner, runner_cfg);
-
     -- Initial values
     --a <= x"00";
     a <= "00000000";
@@ -78,22 +77,30 @@ begin
     b <= "00000000";
     enter <= '0';
     reset <= '0';
-    wait for 100 ms;
+    wait for 0.5 ms;
 
     for i in test_numbs - 1 downto 0 loop
         -- Enter a
         a <= pattern_a(i);
         enter <= '1';
-        wait for 10 ms;
+        wait for 0.10 ms;
         enter <= '0';
-        wait for 10 ms;
+        wait for 0.10 ms;
         -- Enter b
+        a <= "00000000";
         b <= pattern_b(i);
         enter <= '1';
-        wait for 10 ms;
+        wait for 0.10 ms;
         enter <= '0';
-        wait for 10 ms;
-
+        wait for 0.10 ms;
+        b <= "00000000";
+        wait for 1 ms;
+        
+        -- Para iniciar una siguiente operación
+        enter <= '1';
+        wait for 0.10 ms;
+        enter <= '0';
+        wait for 0.10 ms;
         -- Check results
         assert mcd = pattern_res(i)
             report "wrong mcd value" severity warning;

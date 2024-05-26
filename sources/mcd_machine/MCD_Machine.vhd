@@ -61,17 +61,17 @@ component Bloq_COUNTER is
     generic ( bit_size  : integer:= 22);
     
     port ( CLK      : in STD_LOGIC;
-           OUTPUT   : out STD_LOGIC_VECTOR (bit_size - 1 downto 0);
+          -- OUTPUT   : out STD_LOGIC_VECTOR (bit_size - 1 downto 0);
            MAX_OUT  : out STD_LOGIC);
 end component;
 
 
-signal      s_zero, s_sign                  : STD_LOGIC;
-signal      wra, wrb, sel                   : STD_LOGIC;
-signal      resta                           : STD_LOGIC_VECTOR (n - 1 downto 0);
-signal      counter                         : STD_LOGIC;
-signal      enter_reg, reset_reg            : STD_LOGIC;
-signal      enter_inter, reset_inter        : STD_LOGIC;
+signal      s_zero, s_sign                  : STD_LOGIC:='0';
+signal      wra, wrb, sel                   : STD_LOGIC:='0';
+signal      resta                           : STD_LOGIC_VECTOR (n - 1 downto 0):=(others=>'0');
+signal      counter                         : STD_LOGIC:='0';
+signal      enter_reg, reset_reg            : STD_LOGIC:='0';
+signal      enter_inter, reset_inter        : STD_LOGIC:='0';
 
 begin
 
@@ -138,7 +138,7 @@ RESET_Reg_2: Bloq_REGISTER
 
 TC_Counter: Bloq_COUNTER port map(
     CLK         => CLK,
-    OUTPUT      => open,
+   -- OUTPUT      => open,
     MAX_OUT     => counter);
 
 

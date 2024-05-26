@@ -5,3 +5,5 @@ sources/mcd_machine/tb_mcd_machine
 *.cf
 .DS_Store
 */.DS_Store
+CVS_MCD_block
+ApuntesChris.md

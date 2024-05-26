@@ -44,8 +44,8 @@ end component;
 constant vec_size   : integer :=8;
 
 signal s_multiplex_b, s_multiplex_a           : STD_LOGIC_VECTOR (vec_size - 1 downto 0);
-signal s_bb, s_aa                           : STD_LOGIC_VECTOR (vec_size - 1 downto 0);
-signal s_sign                               : STD_LOGIC;
+signal s_bb, s_aa                           : STD_LOGIC_VECTOR (vec_size - 1 downto 0):=(others=>'0');
+signal s_sign                               : STD_LOGIC:= '0';
 
 begin
 
@@ -83,16 +83,20 @@ end process;
 
 Comparation: process (s_bb, s_aa)
 begin
-    if s_bb > s_aa then
-        CERO_OUT <= '0';
-        s_sign <= '0';
-    end if;
-    if s_bb < s_aa then
-        CERO_OUT <= '0';
-        s_sign <= '1';
-    else
-        CERO_OUT <= '1';
-    end if;
+
+        if s_bb > s_aa then
+            CERO_OUT <= '0';
+            s_sign <= '0';
+        
+        elsif s_bb < s_aa then
+            CERO_OUT <= '0';
+            s_sign <= '1';
+        elsif s_bb = s_aa then
+            CERO_OUT <= '1';
+            
+         else
+            report "Error comparing s_aa and s_bb";
+        end if;
 end process;
 
 Subtraction: process (s_bb, s_aa, s_sign)

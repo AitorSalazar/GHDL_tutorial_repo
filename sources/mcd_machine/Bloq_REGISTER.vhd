@@ -44,17 +44,19 @@ end Bloq_REGISTER;
 architecture Behavioral of Bloq_REGISTER is
 
 constant    n_size : integer := n;
-signal  q_reg   : STD_LOGIC_VECTOR (n_size - 1 downto 0);
+signal  q_reg   : STD_LOGIC_VECTOR (n_size - 1 downto 0):=(others=>'0');
 
 begin
 
 process (CLK_IN, RESET_IN)
 begin
-    if RESET_IN = '1' then
-        q_reg <= (others => '0');
-    elsif (CLK_IN'event AND CLK_IN = '1') then
-        if CE_IN = '1' then
-            q_reg <= D_IN;
+    if (CLK_IN'event AND CLK_IN = '1') then
+        if RESET_IN = '1' then
+            q_reg <= (others => '0');
+        else 
+            if CE_IN = '1' then
+                q_reg <= D_IN;
+            end if;
         end if;
     end if;
 end process;
