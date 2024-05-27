@@ -8,3 +8,5 @@ sources/mcd_machine/tb_mcd_machine
 CVS_MCD_block
 ApuntesChris.md
 sources/mcd_machine/vunit_out/
+GtkWave/
+myTests/
