@@ -1,9 +1,9 @@
 library IEEE;
---library vunit_lib;
+library vunit_lib;
 use IEEE.STD_LOGIC_1164.ALL;
 use ieee.numeric_std.all;
 use IEEE.STD_LOGIC_TEXTIO.ALL;
---context vunit_lib.vunit_context;
+context vunit_lib.vunit_context;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -15,7 +15,7 @@ use IEEE.STD_LOGIC_TEXTIO.ALL;
 --use UNISIM.VComponents.all;
 
 entity tb_MCD_Machine is
-    --generic(runner_cfg : string);
+    generic(runner_cfg : string);
 end tb_MCD_Machine;
 
 architecture Behavioral of tb_MCD_Machine is
@@ -69,10 +69,10 @@ end process;
 
 
 TestBench: process
-variable vector_str : string(1 to 8);
+    variable vector_str : string(1 to 8);
 begin
 
-    --test_runner_setup(runner, runner_cfg);
+    test_runner_setup(runner, runner_cfg);
     -- Initial values
     --a <= x"00";
     a <= "00000000";
@@ -116,7 +116,7 @@ begin
     end loop;
 
     wait;
-    --test_runner_cleanup(runner);
+    test_runner_cleanup(runner);
 end process;
 
 end Behavioral;

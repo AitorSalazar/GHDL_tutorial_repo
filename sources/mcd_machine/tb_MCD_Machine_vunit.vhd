@@ -1,9 +1,9 @@
 library IEEE;
---library vunit_lib;
+library vunit_lib;
 use IEEE.STD_LOGIC_1164.ALL;
 use ieee.numeric_std.all;
 use IEEE.STD_LOGIC_TEXTIO.ALL;
---context vunit_lib.vunit_context;
+context vunit_lib.vunit_context;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -14,11 +14,11 @@ use IEEE.STD_LOGIC_TEXTIO.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity tb_MCD_Machine is
-    --generic(runner_cfg : string);
-end tb_MCD_Machine;
+entity tb_MCD_Machine_vunit is
+    generic(runner_cfg : string);
+end tb_MCD_Machine_vunit;
 
-architecture Behavioral of tb_MCD_Machine is
+architecture Behavioral of tb_MCD_Machine_vunit is
 
 component MCD_Machine is
     Generic ( n     : integer := 8);
@@ -69,10 +69,10 @@ end process;
 
 
 TestBench: process
-variable vector_str : string(1 to 8);
+    variable vector_str : string(1 to 8);
 begin
 
-    --test_runner_setup(runner, runner_cfg);
+    test_runner_setup(runner, runner_cfg);
     -- Initial values
     --a <= x"00";
     a <= "00000000";
@@ -108,15 +108,15 @@ begin
         wait for 0.10 ms;
         -- Check results
 
-        --assert mcd /= pattern_res(i)
-            --report "wrong mcd value" severity warning;
+        assert mcd = pattern_res(i)
+            report "wrong mcd value" severity warning;
            -- report "The value of my_vector is: " & vector_str;
            -- report "slv: " & mcd;
         --    report "" & std_logic_vector'image(pattern_res(i));
     end loop;
 
-    wait;
-    --test_runner_cleanup(runner);
+    --wait;
+    test_runner_cleanup(runner);
 end process;
 
 end Behavioral;

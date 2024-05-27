@@ -7,3 +7,4 @@ sources/mcd_machine/tb_mcd_machine
 */.DS_Store
 CVS_MCD_block
 ApuntesChris.md
+sources/mcd_machine/vunit_out/
