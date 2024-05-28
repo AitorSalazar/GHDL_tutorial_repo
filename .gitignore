@@ -11,3 +11,5 @@ sources/mcd_machine/vunit_out/
 GtkWave/
 myTests/
 cocotb/mcd_machine
+*.xml
+cocotb/__pycache__

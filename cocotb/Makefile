@@ -14,5 +14,8 @@ TOPLEVEL = mcd_machine
 # MODULE is the basename of the Python test file
 MODULE = tbcoco_mcd_machine
 
+# Explicitly set the PYTHONPATH to include the current directory
+export PYTHONPATH := $(PWD):$(PYTHONPATH)
+
 # include cocotb's make rules to take care of the simulator setup
 include $(shell cocotb-config --makefiles)/Makefile.sim

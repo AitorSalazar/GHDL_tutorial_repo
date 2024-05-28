@@ -8,6 +8,11 @@ Para mantener un entorno de trabajo más ordenado se ha decidido preparar este b
 
 Se ha partido de diseños VHDL que se habían preparado para otras asignaturas y se han modificado para utilizar las herramientas mencionadas anteriormente. El diseño que se ha elegido es una máquina que computa el máximo común divisor (MCD). Se ha elegido este diseño porque es fácil de testear y tiene cierta complejidad dado que tiene componentes que son interdependientes.
 
+Para tener más limpieza en el repositorio, en el gitignore se han añadido todos los ficheros y directorios que se generan automáticamente con cada ejecución. Por lo tanto, no habrá ficheros de resultados ni *outputs* de ejecuciones. Todos los ficheros que se han utilizado para GHDL, GtkWave y VUnit se encuentran en el directorio `sources/mcd_machine/`, mientras que los ficheros que se han usado para cocotb se encuentran en el directorio `cocotb/`. `original_sources/` contiene los ficheros originales de los que se ha partido y `testbenches/` es un directorio pensado solo para almacenar los tb que se han preparado (no para ejecutarlos).
+
+## Herramientas integradas en HDL
+Primero se han probado las herramientas que se integran directamente con HDL, sin recurrir (o mínimamente )a escribir código en otros lenguajes. Estas son, **GHDL, GtkWave** y **VUnit**.
+
 ### GHDL
 
 GHDL es una herramienta de compilación, elaboración y simulación de ficheros escritos en HDL (ya sea VHDL o SystemVerilog). Por lo tanto, para probar sus capacidades se ha modificado el diseño inicial que se tenía y se ha añadido un tb en el que se prueban varias parejas de números para encontrar el MCD en cada caso.
@@ -27,14 +32,39 @@ Este comando compila los ficheros y generea un archivo ejecutable. Si ha habido 
 
 ### GtkWave
 
-GtkWave es una herramienta pensada para graficar *waveforms* de las simualciones de los archivos HDL. Con GtkWave se pueden mostrar los tb que se han preaparado y simulado con GHDL.
+GtkWave es una herramienta pensada para graficar *waveforms* de las simualciones de los archivos HDL. Con GtkWave se pueden mostrar los tb que se han preaparado y simulado con GHDL. Para probarla, se ha realizado un waveform del tb que se ha preparado con GHDL.
+
+![alt text](WaveFormMCD.png)
+
+Para obtener el waveform simplemente se ha añadido la opción de ejecución para genere un archivo .ghw y después se ha abierto con GtkWave.
+
+    ./tb_mcd_machine --wave=waveMCD.ghw
+    gtkwave waveMCD.ghw
 
 
 ### Vunit
 
-Explain how to run the automated tests for this system
+También se ha probado a usar VUnit para ejecutar la simulación. En el ejemplo que se ha preparado solo hay un único tb, sin embargo esta herramienta tiene mayor utilidad cuando se quieren validar muchos tb, ya que permite automatizar su ejecución.
+
+Para probar VUnit se ha tomado como base el tb [`tb_MCD_Machine_pattern`](sources/mcd_machine/tb_MCD_Machine_pattern.vhd) y se ha modificado para hacerlo compatible con VUnit, dando como resultado el tb [`tb_MCD_Machine_vunit`](sources/mcd_machine/tb_MCD_Machine_vunit.vhd).
+
+Después, se ha preparado el fichero `run.py` añadiendo todos los vhd del directorio y se ha ejecutado.
+
+    python3 run.py
+
+No ha habido mayores problemas con esta herramienta.
+
+![alt text](vunit_screenshot.jpg)
 
 ## Cocotb
 
+Cocotb es una herramienta de validación de bancos de pruebas distinta a las que se han mostrado hasta ahora, porque a diferencia de las demás, permite escribir tbs en Python haciéndolos transparentes tanto para VHDL como para Verilog, con lo que funcionan para cualquiera de los dos lenguajes HDL.
 
+Para probar las herramientas de cocotb, se ha reescrito el tb diseñado para GHDL en Python dando como resultado el script [`tbcoco_mcd_machine`](cocotb/tbcoco_mcd_machine.py). En este script se han diseñado dos funciones, un generador de reloj y la función principal del tb. Junto a este script también se ha preparado el [Makefile](cocotb/Makefile) con el que ejecutar el tb hecho con cocotb con las opciones del simulador. Para simular el tb tan solo ha habido que ejecutar el `Makefile`.
+
+    make
+
+![alt text](cocotb_screenshot.jpg)
+
+Para que el tb funcione se han tenido que realizar algunos cambios en los archivos fuente vhd que ejecutan el diseño. Concretamente, se han cambiado los nombres de todos los entitys de los módulos HDL para quitar todas las mayúsculas. A parte de eso, no se han encontrado mayores dificultades.
 
