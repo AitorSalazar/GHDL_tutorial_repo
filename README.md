@@ -69,14 +69,3 @@ Para probar las herramientas de cocotb, se ha reescrito el tb diseñado para GHD
 Para que el tb funcione se han tenido que realizar algunos cambios en los archivos fuente vhd que ejecutan el diseño. Concretamente, se han cambiado los nombres de todos los entitys de los módulos HDL para quitar todas las mayúsculas. A parte de eso, no se han encontrado mayores dificultades.
 
 
-## Conclusiones
-
-### Aitor
-De todas las herramientas que hemos conocido y utiizado en el máster, las librerías que se han usado en este segundo bloque de la asignatura son las que más he disfrutado y agradecido. No solo por el hecho de que son herramientas de uso libre, sino también porque son las que me han parecido más útiles y eficaces. VHDL sigue siendo un lenguaje que no tiene tanto impacto como otros y es por ello un lenguaje todavía algo desconocido, por lo que la existencia de este tipo de herramienta de validación y automatización facilitan el trabajo a realizar. Lo cierto es que la validación del código con bancos de trabajo es una de las etapas más tediosas de los diseños hechos con VHDL y disponer de herramientas como VUnit que facilitan y automatizan su ejecucón es de gran ayuda.
-
-Algo a destacar es la gran cantidad de información que se da para el poco tiempo del que se dispone. La verdad es que, con la facilidad y versatilidad que ofrecen las herramientas *open source*, es una oportunidad perdida que se dediquen tan pocas horas lectivas al aprendizaje de estas herramientas en comparación con las que se dedican a las herramientas de cosimulación de Simulink. Por un lado, es cierto que Simulink ofrece un abanico de posibilidades más amplio gracias a su completa libería de complementos y a que es un entorno de desarrollo basado en modelos completo. Pero, por otro lado, el hecho de que sea una herramienta de pago hace que no muchas empresas estén dispuestas a dar el salto. Por ello, exceptuando mercados muy concretos que estén enfocados en el diseño de soluciones de ingeniería, lo más probable es no tener acceso al entorno de Mathworks, por lo que conocer y saber utilizar las herramientas open source cobra especial importancia.
-
-La conclusión general es que este bloque de la asigntaura ha sido muy satisfactorio y que si hubiera habido más tiempo disponible habría sido muy enriquecedor poder trabajar más con las herramientas que se han mencionado, especialmente Cocotb. Esta última, a pesar de haber sido la más escueta, es la que más me ha asombrado dado el gran potencial que ofrece el poder preparar bancos de trabajo en un lenguaje tan potente como es Python.
-
-### Christopher
-
